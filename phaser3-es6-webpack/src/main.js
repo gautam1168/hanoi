@@ -3,6 +3,7 @@ import 'phaser';
 // import MarioBrosScene from './MarioBrosScene';
 // import TitleScene from './TitleScene';
 import GameOfLifeScene from './GameOfLifeScene';
+import ChainreactionScene from './ChainreactionScene';
 
 
 let config = {
@@ -14,7 +15,7 @@ let config = {
     physics: {
         default: 'matter',
 		matter: {
-			debug: true
+			debug: false
 		}
     },
 	backgroundColor: '#22262a',
@@ -22,7 +23,8 @@ let config = {
         // BootScene,
         // TitleScene,
         // MarioBrosScene,
-		GameOfLifeScene
+		// GameOfLifeScene,
+		ChainreactionScene
     ]
 };
 window.game = new Phaser.Game(config);
