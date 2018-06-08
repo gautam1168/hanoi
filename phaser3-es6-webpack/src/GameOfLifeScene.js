@@ -5,6 +5,7 @@ class GameOfLifeScene extends Phaser.Scene {
 		});
 		this.W = window.innerWidth;
 		this.H = window.innerHeight;
+		this.numbers = [];
 	}
 
 	preload() {
@@ -52,9 +53,6 @@ class GameOfLifeScene extends Phaser.Scene {
 
 		let target = this.add.sprite(leftoffset*W, (topOffset - 0.02)*H - tube.height*0.7, 'target');
 		target.setInteractive();
-		target.on('pointerdown', function(pointer) {
-			console.log(pointer);
-		});
 	}
 
 	createNumbers(leftoffset) {
@@ -84,110 +82,9 @@ class GameOfLifeScene extends Phaser.Scene {
 				number.setAngularVelocity(0);
 			})
 			this.input.setDraggable(number, true);
+			this.numbers.push(number);
 		}
 	}
-
-	// create() {
-	// 	//tube1
-	// 	let rect = this.add.sprite(100, 400, 'rect');
-	// 	rect.setDisplaySize(20, 50);
-	// 	let wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 50}} );
-	// 	wall.setStatic(true);
-	// 	wall.setAngle(90);
-	//
-	// 	rect = this.add.sprite(65, 334, 'rect');
-	// 	rect.setDisplaySize(20, 150);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 150}} );
-	// 	wall.setStatic(true);
-	//
-	// 	rect = this.add.sprite(135, 334, 'rect');
-	// 	rect.setDisplaySize(20, 150);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 150}} );
-	// 	wall.setStatic(true);
-	//
-	// 	//tube2
-	// 	rect = this.add.sprite(200, 400, 'rect');
-	// 	rect.setDisplaySize(20, 50);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 50}} );
-	// 	wall.setStatic(true);
-	// 	wall.setAngle(90);
-	//
-	// 	rect = this.add.sprite(165, 334, 'rect');
-	// 	rect.setDisplaySize(20, 150);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 150}} );
-	// 	wall.setStatic(true);
-	//
-	// 	rect = this.add.sprite(235, 334, 'rect');
-	// 	rect.setDisplaySize(20, 150);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 150}} );
-	// 	wall.setStatic(true);
-	//
-	// 	//tube3
-	// 	rect = this.add.sprite(300, 400, 'rect');
-	// 	rect.setDisplaySize(20, 50);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 50}} );
-	// 	wall.setStatic(true);
-	// 	wall.setAngle(90);
-	//
-	// 	rect = this.add.sprite(265, 334, 'rect');
-	// 	rect.setDisplaySize(20, 150);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 150}} );
-	// 	wall.setStatic(true);
-	//
-	// 	rect = this.add.sprite(335, 334, 'rect');
-	// 	rect.setDisplaySize(20, 150);
-	// 	wall = this.matter.add.gameObject(rect, {shape: {type: 'rectangle', width: 20, height: 150}} );
-	// 	wall.setStatic(true);
-	//
-	// 	let number1 = this.add.text(100, 200, '2', { font: '32px Arial', fill: '#ffffff' });
-	// 	number1 = this.matter.add.gameObject(number1, {shape: {type: 'rectangle', width: 40, height: 40}});
-	// 	number1.setInteractive(new Phaser.Geom.Rectangle(0, 0, 40, 40), function(number1, x, y, sprite) {
-	// 			return (x > number1.x && y > number1.y && x < number1.width && y < number1.height);
-	// 	});
-	// 	number1.on('drag', function(pointer, x, y) {
-	// 		number1.setPosition(x, y);
-	// 	})
-	// 	number1.on('dragstart', function(pointer, x, y) {
-	// 		number1.setIgnoreGravity(true);
-	// 	})
-	// 	number1.on('dragend', function(pointer, x, y) {
-	// 		number1.setIgnoreGravity(false);
-	// 	})
-	// 	this.input.setDraggable(number1, true);
-	//
-	// 	let number2 = this.add.text(100, 150, '1', { font: '32px Arial', fill: '#ffffff' });
-	// 	number2 = this.matter.add.gameObject(number2, {shape: {type: 'rectangle', width: 40, height: 40}});
-	// 	number2.setInteractive(new Phaser.Geom.Rectangle(0, 0, 40, 40), function(number2, x, y, sprite) {
-	// 			return (x > number2.x && y > number2.y && x < number2.width && y < number2.height);
-	// 	});
-	// 	number2.on('drag', function(pointer, x, y) {
-	// 		number2.setPosition(x, y);
-	// 	})
-	// 	number2.on('dragstart', function(pointer, x, y) {
-	// 		number2.setIgnoreGravity(true);
-	// 	})
-	// 	number2.on('dragend', function(pointer, x, y) {
-	// 		number2.setIgnoreGravity(false);
-	// 	})
-	// 	this.input.setDraggable(number2, true);
-	//
-	// 	let number3 = this.add.text(100, 100, '3', { font: '32px Arial', fill: '#ffffff' });
-	// 	number3 = this.matter.add.gameObject(number3, {shape: {type: 'rectangle', width: 40, height: 40}});
-	// 	number3.setInteractive(new Phaser.Geom.Rectangle(0, 0, 40, 40), function(number3, x, y, sprite) {
-	// 			return (x > number3.x && y > number3.y && x < number3.width && y < number3.height);
-	// 	});
-	// 	number3.on('drag', function(pointer, x, y) {
-	// 		number3.setPosition(x, y);
-	// 	})
-	// 	number3.on('dragstart', function(pointer, x, y) {
-	// 		number3.setIgnoreGravity(true);
-	// 	})
-	// 	number3.on('dragend', function(pointer, x, y) {
-	// 		number3.setIgnoreGravity(false);
-	// 	})
-	// 	this.input.setDraggable(number3, true);
-	// }
-
 }
 
 export default GameOfLifeScene;
