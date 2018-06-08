@@ -10,6 +10,10 @@ class Board {
 		};
 	}
 
+	getPlayerKey() {
+		return this.ballkeys[this.player][0];
+	}
+
 	setAt(x, y) {
 		let imagekey, explode = false;
 		if (this.balls[x][y] == 0) {
@@ -133,6 +137,7 @@ class ChainreactionScene extends Phaser.Scene {
 		this.map = null;
 		this.board = new Board();
 		this.ballimages = new Array(20).fill(0).map(e => new Array(20).fill(null));
+		this.indicator = null;
 	}
 
 	preload() {
@@ -157,9 +162,9 @@ class ChainreactionScene extends Phaser.Scene {
 		this.map = this.make.tilemap({ tileWidth: 42, tileHeight: 42, width: 20, height:20 });
 		let tiles = this.map.addTilesetImage('base');
 		let layer = this.map.createBlankDynamicLayer('layer', tiles);
-		layer.fill(0, 0, 0, this.map.width, this.map.height);
+		layer.fill(0, 0, 1, this.map.width, this.map.height);
 		layer = this.map.convertLayerToStatic(layer);
-
+		this.indicator = this.add.image(21, 21, this.board.getPlayerKey());
 		let config = {
 			key: 'blueExplodeAnimation',
 			frames: this.anims.generateFrameNumbers('blueExplode', {prefix: 'blue_', start: 0, end: 10, first: 0 }),
@@ -186,6 +191,10 @@ class ChainreactionScene extends Phaser.Scene {
 				this.ballimages[pointerTileX][pointerTileY].destroy();
 				explodsprite.anims.play('blueExplodeAnimation');
 			}
+			if (this.indicator != null) {
+				this.indicator.destroy();
+			}
+			this.indicator = this.add.image(21, 21, this.board.getPlayerKey());
 		}
 	}
 
